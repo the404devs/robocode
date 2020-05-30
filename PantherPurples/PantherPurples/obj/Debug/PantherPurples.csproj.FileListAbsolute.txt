@@ -1,0 +1,7 @@
+E:\robocode\robocode\myTanks\PantherPurples\PantherPurples\bin\Debug\PantherPurples.dll
+E:\robocode\robocode\myTanks\PantherPurples\PantherPurples\bin\Debug\PantherPurples.pdb
+E:\robocode\robocode\myTanks\PantherPurples\PantherPurples\bin\Debug\robocode.dll
+E:\robocode\robocode\myTanks\PantherPurples\PantherPurples\bin\Debug\robocode.xml
+E:\robocode\robocode\myTanks\PantherPurples\PantherPurples\obj\Debug\PantherPurples.dll
+E:\robocode\robocode\myTanks\PantherPurples\PantherPurples\obj\Debug\PantherPurples.pdb
+E:\robocode\robocode\myTanks\PantherPurples\PantherPurples\obj\Debug\PantherPurples.csprojResolveAssemblyReference.cache

@@ -1,0 +1,7 @@
+W:\robocode\robocode\myTanks\bjc not stolen\BergadeBuster\BergadeBuster\obj\Debug\BergadeBuster.csprojResolveAssemblyReference.cache
+W:\robocode\robocode\myTanks\bjc not stolen\BergadeBuster\BergadeBuster\bin\Debug\BergadeBuster.dll
+W:\robocode\robocode\myTanks\bjc not stolen\BergadeBuster\BergadeBuster\bin\Debug\BergadeBuster.pdb
+W:\robocode\robocode\myTanks\bjc not stolen\BergadeBuster\BergadeBuster\bin\Debug\robocode.dll
+W:\robocode\robocode\myTanks\bjc not stolen\BergadeBuster\BergadeBuster\bin\Debug\robocode.xml
+W:\robocode\robocode\myTanks\bjc not stolen\BergadeBuster\BergadeBuster\obj\Debug\BergadeBuster.dll
+W:\robocode\robocode\myTanks\bjc not stolen\BergadeBuster\BergadeBuster\obj\Debug\BergadeBuster.pdb

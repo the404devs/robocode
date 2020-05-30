@@ -1,0 +1,309 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Robocode;
+using System.Drawing;
+using System.Windows.Forms;
+using System.Diagnostics;
+
+namespace StarPower
+{
+    public class StarPower1 : Robot
+    //May 12th, 2017 against Victory (ironic, because we had the victory)
+    //Combination of Walls and Corners
+    {
+        //Custom Functions
+        
+
+        void sweep()
+        {
+            int x = 4;
+            while (x > 0)
+            {
+                this.TurnGunRight(100);
+                this.TurnGunLeft(100);
+                x--;
+            }
+        }
+
+        void fullSweep()
+        {
+            this.TurnGunRight(360);
+        }
+
+        void colourFlash()
+        {
+            Random r = new Random();
+            int colour = r.Next(1, 6);
+            if (colour == 1)
+            {
+                this.SetColors(Color.White, Color.Green, Color.Blue);
+            }
+            else if (colour == 2)
+            {
+                this.SetColors(Color.Red, Color.Blue, Color.Purple);
+            }
+            else if (colour == 3)
+            {
+                this.SetColors(Color.Green, Color.Purple, Color.White);
+            }
+            else if (colour == 4)
+            {
+                this.SetColors(Color.Blue, Color.White, Color.Red);
+            }
+            else if (colour == 5)
+            {
+                this.SetColors(Color.Purple, Color.Red, Color.Green);
+            }
+        }
+        //End Functions
+
+        public override void Run()
+        {
+            base.Run();
+            this.SetAllColors(Color.Gold);
+            colourFlash();
+            this.TurnLeft(this.Heading);
+            colourFlash();
+            this.Ahead(this.BattleFieldHeight - this.Y);
+            colourFlash();
+            this.TurnRight(90);
+            colourFlash();
+            this.Ahead(this.BattleFieldWidth - this.X);
+            colourFlash();
+            this.TurnRight(90);
+            colourFlash();
+
+            while (true)
+            {
+                sweep();
+                colourFlash();
+                this.TurnGunRight(90);
+                colourFlash();
+                this.Ahead(this.BattleFieldHeight);
+                colourFlash();
+                this.TurnGunLeft(90);
+                colourFlash();
+                this.TurnRight(90);
+                colourFlash();
+                sweep();
+                colourFlash();
+                this.TurnGunRight(90);
+                colourFlash();
+                this.Ahead(this.BattleFieldWidth);
+                colourFlash();
+                this.TurnGunLeft(90);
+                colourFlash();
+                this.TurnRight(90);
+                colourFlash();
+            }
+        }
+
+        public override void OnScannedRobot(ScannedRobotEvent evnt)
+        {
+            base.OnScannedRobot(evnt);
+            if (evnt.Distance < 50)
+            {
+                this.Fire(3);
+            }
+            else if (evnt.Distance < 100)
+            {
+                this.Fire(2.5);
+            }
+            else
+            {
+                this.Fire(2);
+            }
+        }
+    }
+    /*************************************************************************************************************************************************/
+    public class StarPower2 : Robot
+    //The Bergade Buster
+    //May 18th, 2017 against BJCBergade
+    //Walls killer, I guess
+    {
+        //Custom Functions
+        void colourFlash()//Our signature flashing colour sequence
+        {
+            Random r = new Random();
+            int colour = r.Next(1, 6);
+            if (colour == 1)
+            {
+                this.SetColors(Color.White, Color.Green, Color.Blue);
+            }
+            else if (colour == 2)
+            {
+                this.SetColors(Color.Red, Color.Blue, Color.Purple);
+            }
+            else if (colour == 3)
+            {
+                this.SetColors(Color.Green, Color.Purple, Color.White);
+            }
+            else if (colour == 4)
+            {
+                this.SetColors(Color.Blue, Color.White, Color.Red);
+            }
+            else if (colour == 5)
+            {
+                this.SetColors(Color.Purple, Color.Red, Color.Green);
+            }
+        }
+
+        void sweep()//because the robot needs to do something, or else we'll be disabled
+        {
+            int x = 4;
+            while (x > 0)
+            {
+                this.TurnGunRight(1);//turn the gun back and forth just a tiny amount
+                colourFlash();
+                this.TurnGunLeft(1);
+                colourFlash();
+                x--;
+            }
+        }
+        //End Functions
+
+        public override void Run()//Code that first runs when the battle starts
+        {
+            base.Run();
+            this.SetAllColors(Color.Gold);
+            colourFlash();//Change colours
+            this.TurnLeft(this.Heading);//Turn towards the top of the map
+            colourFlash();
+            this.Ahead(this.BattleFieldHeight - this.Y);//Move to the top
+            colourFlash();
+            this.TurnRight(90);//Turn right
+            colourFlash();
+            this.Ahead(this.BattleFieldWidth - this.X - 100);//Move towards the special corner, stop 100px away from it
+
+
+            while (true)//Infinite loop
+            {
+                sweep();//"Sweep" the gun back and forth 1 degree, only because we need to do something
+            }
+        }
+
+        public override void OnScannedRobot(ScannedRobotEvent evnt)//Code when we see the enemy
+        {
+            base.OnScannedRobot(evnt);
+            if (this.Y >= this.BattleFieldHeight - 36)//Make sure we're at the top of the field
+            {
+                this.Fire(3);//Shoot full strength at enemy
+                Out.WriteLine("Bang!");
+            }
+        }
+
+        public override void OnHitRobot(HitRobotEvent evnt)//Code when the collide with the enemy
+        {
+            base.OnHitRobot(evnt);
+
+            if (this.Y >= this.BattleFieldHeight - 36 && this.X >= this.BattleFieldWidth - 136)
+            //Check if we are in position by the top right corner.
+            //Minus 36, because the robot measures 36x36.
+            //Minus 136, because we stopped 100px from the corner, and the robot is 36x36
+            {
+                this.Back(30);//Back up a bit
+                this.TurnRight(evnt.Bearing);//Turn towards enemy
+                this.Fire(3);//Fire
+                Out.WriteLine("Bang!");
+            }
+        }
+    }
+    /*************************************************************************************************************************************************/
+    public class StarPowerExtra : Robot
+    //Aimbot
+    {
+        //Custom Functions
+        void colourFlash()//Colour changing code
+        {
+            Random r = new Random();//Create a variable to store random values
+            int colour = r.Next(1, 6);
+            if (colour == 1)
+            {
+                this.SetColors(Color.White, Color.Green, Color.Blue);
+            }
+            else if (colour == 2)
+            {
+                this.SetColors(Color.Red, Color.Blue, Color.Purple);
+            }
+            else if (colour == 3)
+            {
+                this.SetColors(Color.Green, Color.Purple, Color.White);
+            }
+            else if (colour == 4)
+            {
+                this.SetColors(Color.Blue, Color.White, Color.Red);
+            }
+            else if (colour == 5)
+            {
+                this.SetColors(Color.Purple, Color.Red, Color.Green);
+            }
+        }
+
+        void sweep()
+        {
+            int x = 4;
+            while (x > 0)
+            {
+                this.TurnGunRight(100);
+                this.TurnGunLeft(100);
+                x--;
+            }
+        }
+
+        //End Functions
+
+        public override void Run()
+        {
+            base.Run();
+            colourFlash();//Change colours
+            this.TurnLeft(this.Heading);//Face the top of the battlefield
+            colourFlash();
+            //this.Ahead((this.BattleFieldHeight / 2) - this.Y);
+            this.Ahead(this.BattleFieldHeight - this.Y);//Move to the top
+            colourFlash();
+            this.TurnLeft(90);//Turn left
+            colourFlash();
+            //this.Back((this.BattleFieldWidth / 2) - this.X);
+            this.Ahead(this.BattleFieldWidth - this.X);//Move to the top right corner
+            colourFlash();
+
+            while (true)
+            {
+                colourFlash();//Change colours
+                this.TurnLeft(5);//By default turn left in a circle
+                //sweep();
+            }
+        }
+
+        public override void OnScannedRobot(ScannedRobotEvent evnt)//Code for when we see the enemy
+        {
+            this.TurnRight(evnt.Bearing);//Turn towards the enemy
+            this.Ahead(0.7);//Move ahead a tiny bit
+
+            if (evnt.Distance < 50)//Determine the distance to the enemy, and change firing strength accordingly
+            {
+                this.Fire(3);
+            }
+            else if (evnt.Distance < 100)
+            {
+                this.Fire(2.5);
+            }
+            else
+            {
+                this.Fire(2);
+            }
+        }
+
+        public override void OnHitRobot(HitRobotEvent evnt)//Code when we collide with the enemy
+        {
+            base.OnHitRobot(evnt);
+            this.Fire(3);//Fire full strength
+        }
+    }   
+}
+
+
+

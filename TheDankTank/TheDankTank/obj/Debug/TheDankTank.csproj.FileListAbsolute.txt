@@ -1,0 +1,6 @@
+E:\robocode\robocode\myTanks\TheDankTank\TheDankTank\bin\Debug\TheDankTank.dll
+E:\robocode\robocode\myTanks\TheDankTank\TheDankTank\bin\Debug\TheDankTank.pdb
+E:\robocode\robocode\myTanks\TheDankTank\TheDankTank\bin\Debug\robocode.dll
+E:\robocode\robocode\myTanks\TheDankTank\TheDankTank\bin\Debug\robocode.xml
+E:\robocode\robocode\myTanks\TheDankTank\TheDankTank\obj\Debug\TheDankTank.dll
+E:\robocode\robocode\myTanks\TheDankTank\TheDankTank\obj\Debug\TheDankTank.pdb
